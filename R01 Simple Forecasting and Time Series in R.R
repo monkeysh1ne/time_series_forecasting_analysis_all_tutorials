@@ -29,3 +29,9 @@ seasonplot(a10, ylab="$ million",
 monthplot(a10, ylab="$ million", xlab="Month", xaxt="n",
           main="Seasonal deviation plot: antidiabetic drug sales")
 axis(1, at=1:12, labels=month.abb, cex=0.8)
+
+plot(jitter(fuel[,5]), jitter(fuel[,8]),
+                             xlab="city mpg",
+                             ylab="carbon footprint")
+
+pairs(fuel[,-c(1:2,4,7)], pch=19)

@@ -79,6 +79,10 @@ X^(1)^ = [1,-2,-1,-2,-3,0]
 
 What should be the values of X after diffing it twice (ie, X^(2)^)?
 
-X^(2)^ = [1,-1,1,1,-3]
+X^(2)^ = [1,-1,1,1,-3] # this is my answer so I hope it's right!
+
+Diffing continues until any evident trend in the data is _removed_.
+
+
 
 

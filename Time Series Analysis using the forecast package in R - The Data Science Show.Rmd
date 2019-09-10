@@ -18,11 +18,29 @@ $\gamma_t = \beta_1\gamma_{_t-_1} + \beta_2\gamma_{_t-_2}+...+\beta_\rho\gamma_{
 * Moving Average (MA) Model
 
 $\gamma_t = \epsilon_t+\alpha_1\epsilon_{_t-_1}+\alpha_2\epsilon_{_t-_2}+...+\alpha_\delta\epsilon_{_t-_\delta}$
-```{r}
 
+* ARMA
+
+$\gamma_t = \beta_1\gamma_{_t-1}+\beta_2\gamma_{_t-2}+\beta_3\gamma_{_t-3}+...+\beta_\rho\gamma_{_t-\rho}+\epsilon_t+\alpha_1\epsilon_{_t-1}+\alpha_2\epsilon_{_t-2}+...+\alpha_\delta\epsilon_{_t-\delta}$
+
+```{r}
+install.packages("WDI")
+library("WDI")
+gdp <- WDI(country=c("US"), indicator=c("NY.GDP.PCAP.CD"), start=1960, end=2016)
+head(gdp)
+```
+The column names of the dataset are a little clunky so let's fix this with the names() function...
+```{r}
+names(gdp) <- c("iso2c", "country", "GDPPerCap", "year")
+head(gdp)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+We'll now organise the dataset by year (ASC) order...
+```{r}
+gdp <- gdp[order(gdp$year),] #remember comma!!
+head(gdp)
+```
+
 
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 

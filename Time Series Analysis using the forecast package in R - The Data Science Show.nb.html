@@ -1767,17 +1767,47 @@ summary {
 <li>Moving Average (MA) Model</li>
 </ul>
 <p><span class="math inline">\(\gamma_t = \epsilon_t+\alpha_1\epsilon_{_t-_1}+\alpha_2\epsilon_{_t-_2}+...+\alpha_\delta\epsilon_{_t-_\delta}\)</span></p>
+<ul>
+<li>ARMA</li>
+</ul>
+<p><span class="math inline">\(\gamma_t = \beta_1\gamma_{_t-1}+\beta_2\gamma_{_t-2}+\beta_3\gamma_{_t-3}+...+\beta_\rho\gamma_{_t-\rho}+\epsilon_t+\alpha_1\epsilon_{_t-1}+\alpha_2\epsilon_{_t-2}+...+\alpha_\delta\epsilon_{_t-\delta}\)</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcyhcIldESVwiKVxubGlicmFyeShcIldESVwiKVxuZ2RwIDwtIFdESShjb3VudHJ5PWMoXCJVU1wiKSwgaW5kaWNhdG9yPWMoXCJOWS5HRFAuUENBUC5DRFwiKSwgc3RhcnQ9MTk2MCwgZW5kPTIwMTYpXG5oZWFkKGdkcClcbmBgYCJ9 -->
+<pre class="r"><code>install.packages(&quot;WDI&quot;)
+library(&quot;WDI&quot;)
+gdp &lt;- WDI(country=c(&quot;US&quot;), indicator=c(&quot;NY.GDP.PCAP.CD&quot;), start=1960, end=2016)
+head(gdp)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>The column names of the dataset are a little clunky so let’s fix this with the names() function…</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
+<p>We’ll now organise the dataset by year (ASC) order…</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2RwIDwtIGdkcFtvcmRlcihnZHAkeWVhciksXSAjcmVtZW1iZXIgY29tbWEhIVxuaGVhZChnZHApXG5gYGAifQ== -->
+<pre class="r"><code>gdp &lt;- gdp[order(gdp$year),] #remember comma!!
+head(gdp)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERpaXVCaVlHQmdZbUJtWldKZ1lnWXlXWmlBQkNNREN3TW5pSzVnWUdBV0Jva0NzUUFRczBFbG1FS0R5V0NobXNFYm1wZFprcHFpRUZ5U1dKSmFURDlCQmdZK2tDc2NsdGZabTFoUDRIQlkvbFhCSUZsVDFHRmwrUHJsZHdKTEhGYkZzaCtwLzJmanNQcjF3MGZmWjJjNnJIM08rekRZNVN2SUlMRHJHZGhYQVBGS0lGNEZ4S3VCZUEwUXIwVUxPdGE4eEZ5d1pRTGc0SU1LWmhibkd5VkRPZXpKK2FWNUpVV1ZVQzZudTB0QVFHcVJjMklCVklDbE1qV3hDTTFVenFMOGNqMll5VkRuTUZnQ3NRVVFtd094R1JDYkFyRUp1bk9TY3hLTFljNkJDWEtsSkpZazZxVVZBYzBEOHY2aGFXSFBMeWpKek04RGFtSUNKUUZXTk0yTVJXZ0MvS1Y1SUplbDZDWm5sT1psNnhxQ0xBQkxRekF2bEdaRFlyTkFyR1Q2RHpXS0ZXb1VXMnBlZW1aZUtzenRPWWxKcVRsUURoOHdCTUFCb0ZkUWxKbFhBdk1KVUxSWXJ5Uy9KQkdtamlzNVB3Y21Bdllid3o4QS9HUXFlZkFDQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["iso2c"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["GDPPerCap"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"US","2":"United States","3":"3007.123","4":"1960","_rn_":"57"},{"1":"US","2":"United States","3":"3066.563","4":"1961","_rn_":"56"},{"1":"US","2":"United States","3":"3243.843","4":"1962","_rn_":"55"},{"1":"US","2":"United States","3":"3374.515","4":"1963","_rn_":"54"},{"1":"US","2":"United States","3":"3573.941","4":"1964","_rn_":"53"},{"1":"US","2":"United States","3":"3827.527","4":"1965","_rn_":"52"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
 <p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGltZSBTZXJpZXMgQW5hbHlzaXMgd2l0aCBmb3JlY2FzdCBwYWNrYWdlIGluIFIiCm91dHB1dDogaHRtbF9ub3RlYm9vawphdXRob3I6IFRoZSBEYXRhIFNjaWVuY2UgU2hvdwotLS0KCllvdXR1YmUgdHV0b3JpYWwgW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSAgCgojIFRpbWUgU2VyaWVzIERhdGEKRGF0YSB0aGF0IGNoYW5nZXMgb3ZlciB0aW1lLCBlLmcuLCBzdG9jayBwcmljZSwgc2FsZXMgZ3Jvd3RoLgoKIyBBUiwgTUEgJiBBUklNQSBNb2RlbHMKCiogQXV0b3JlZ3Jlc3NpdmUgKEFSKSBNb2RlbAoKJFxnYW1tYV90ID0gXGJldGFfMVxnYW1tYV97X3QtXzF9ICsgXGJldGFfMlxnYW1tYV97X3QtXzJ9Ky4uLitcYmV0YV9ccmhvXGdhbW1hX3tfdC1fXHJob30kCgoqIE1vdmluZyBBdmVyYWdlIChNQSkgTW9kZWwKCiRcZ2FtbWFfdCA9IFxlcHNpbG9uX3QrXGFscGhhXzFcZXBzaWxvbl97X3QtXzF9K1xhbHBoYV8yXGVwc2lsb25fe190LV8yfSsuLi4rXGFscGhhX1xkZWx0YVxlcHNpbG9uX3tfdC1fXGRlbHRhfSQKYGBge3J9CgpgYGAKCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4KCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ3RybCtTaGlmdCtLKiB0byBwcmV2aWV3IHRoZSBIVE1MIGZpbGUpLgoKVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGltZSBTZXJpZXMgQW5hbHlzaXMgd2l0aCBmb3JlY2FzdCBwYWNrYWdlIGluIFIiCm91dHB1dDogaHRtbF9ub3RlYm9vawphdXRob3I6IFRoZSBEYXRhIFNjaWVuY2UgU2hvdwotLS0KCllvdXR1YmUgdHV0b3JpYWwgW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSAgCgojIFRpbWUgU2VyaWVzIERhdGEKRGF0YSB0aGF0IGNoYW5nZXMgb3ZlciB0aW1lLCBlLmcuLCBzdG9jayBwcmljZSwgc2FsZXMgZ3Jvd3RoLgoKIyBBUiwgTUEgJiBBUklNQSBNb2RlbHMKCiogQXV0b3JlZ3Jlc3NpdmUgKEFSKSBNb2RlbAoKJFxnYW1tYV90ID0gXGJldGFfMVxnYW1tYV97X3QtXzF9ICsgXGJldGFfMlxnYW1tYV97X3QtXzJ9Ky4uLitcYmV0YV9ccmhvXGdhbW1hX3tfdC1fXHJob30kCgoqIE1vdmluZyBBdmVyYWdlIChNQSkgTW9kZWwKCiRcZ2FtbWFfdCA9IFxlcHNpbG9uX3QrXGFscGhhXzFcZXBzaWxvbl97X3QtXzF9K1xhbHBoYV8yXGVwc2lsb25fe190LV8yfSsuLi4rXGFscGhhX1xkZWx0YVxlcHNpbG9uX3tfdC1fXGRlbHRhfSQKCiogQVJNQQoKJFxnYW1tYV90ID0gXGJldGFfMVxnYW1tYV97X3QtMX0rXGJldGFfMlxnYW1tYV97X3QtMn0rXGJldGFfM1xnYW1tYV97X3QtM30rLi4uK1xiZXRhX1xyaG9cZ2FtbWFfe190LVxyaG99K1xlcHNpbG9uX3QrXGFscGhhXzFcZXBzaWxvbl97X3QtMX0rXGFscGhhXzJcZXBzaWxvbl97X3QtMn0rLi4uK1xhbHBoYV9cZGVsdGFcZXBzaWxvbl97X3QtXGRlbHRhfSQKCmBgYHtyfQppbnN0YWxsLnBhY2thZ2VzKCJXREkiKQpsaWJyYXJ5KCJXREkiKQpnZHAgPC0gV0RJKGNvdW50cnk9YygiVVMiKSwgaW5kaWNhdG9yPWMoIk5ZLkdEUC5QQ0FQLkNEIiksIHN0YXJ0PTE5NjAsIGVuZD0yMDE2KQpoZWFkKGdkcCkKYGBgClRoZSBjb2x1bW4gbmFtZXMgb2YgdGhlIGRhdGFzZXQgYXJlIGEgbGl0dGxlIGNsdW5reSBzbyBsZXQncyBmaXggdGhpcyB3aXRoIHRoZSBuYW1lcygpIGZ1bmN0aW9uLi4uCmBgYHtyfQpuYW1lcyhnZHApIDwtIGMoImlzbzJjIiwgImNvdW50cnkiLCAiR0RQUGVyQ2FwIiwgInllYXIiKQpoZWFkKGdkcCkKYGBgCgpXZSdsbCBub3cgb3JnYW5pc2UgdGhlIGRhdGFzZXQgYnkgeWVhciAoQVNDKSBvcmRlci4uLgpgYGB7cn0KZ2RwIDwtIGdkcFtvcmRlcihnZHAkeWVhciksXSAjcmVtZW1iZXIgY29tbWEhIQpoZWFkKGdkcCkKYGBgCgoKV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuCgpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuCg==</div>
 
 
 

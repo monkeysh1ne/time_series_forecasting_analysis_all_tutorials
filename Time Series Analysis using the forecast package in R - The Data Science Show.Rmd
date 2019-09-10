@@ -23,30 +23,30 @@ $\gamma_t = \epsilon_t+\alpha_1\epsilon_{_t-_1}+\alpha_2\epsilon_{_t-_2}+...+\al
 
 $\gamma_t = \beta_1\gamma_{_t-1}+\beta_2\gamma_{_t-2}+\beta_3\gamma_{_t-3}+...+\beta_\rho\gamma_{_t-\rho}+\epsilon_t+\alpha_1\epsilon_{_t-1}+\alpha_2\epsilon_{_t-2}+...+\alpha_\delta\epsilon_{_t-\delta}$
 
-```{r}
+```{r obtain-data}
 install.packages("WDI")
 library("WDI")
 gdp <- WDI(country=c("US"), indicator=c("NY.GDP.PCAP.CD"), start=1960, end=2016)
 head(gdp)
 ```
 The column names of the dataset are a little clunky so let's fix this with the names() function...
-```{r}
+```{r change-colnames}
 names(gdp) <- c("iso2c", "country", "GDPPerCap", "year")
 head(gdp)
 ```
 
 We'll now organise the dataset by year (ASC) order...
-```{r}
+```{r reorder-data-by-year(ASC)}
 gdp <- gdp[order(gdp$year),] #remember comma!!
 head(gdp)
 ```
 
 An initial plot shows GDP Per Capita trend (if any)
-```{r}
+```{r initial-plot}
 plot(GDPPerCap~year, data = gdp)
 ```
 Let's make things a little more eye catching using ggplot...
-```{r}
+```{r ggplot-plot-fancy}
 library(ggplot2)
 ggplot(gdp, aes(x=gdp$year, y=gdp$GDPPerCap)) +
         geom_point(
@@ -56,8 +56,29 @@ ggplot(gdp, aes(x=gdp$year, y=gdp$GDPPerCap)) +
                 size=2,
                 shape=21,
                 stroke=1
-        )
+        ) +
+        labs(title="GDP Per Capita NY, USA 1960-2016", x="Year", y="GDP Per Capita")
 ```
+What these plots show us is that the data is _non-stationary_.  We therefore need to do some 'diffing' to towards producing a stationary dataset.
 
+# Stationary Data Assumption
+
+* The mean and variance of a time series are constant for the whole series.
+
+# Diffing
+
+* The process of subtracting one observation from another.
+* Used for transforming non-stationary data into stationary data.
+* Example
+
+X = [5,4,6,7,9,12,12]
+
+What should the values of X after diffing it once be (ie., X^(1)^)?
+
+X^(1)^ = [1,-2,-1,-2,-3,0]
+
+What should be the values of X after diffing it twice (ie, X^(2)^)?
+
+X^(2)^ = [1,-1,1,1,-3]
 
 

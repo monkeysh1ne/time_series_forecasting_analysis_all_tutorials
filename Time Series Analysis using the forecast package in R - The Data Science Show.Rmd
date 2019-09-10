@@ -1,10 +1,10 @@
 ---
 title: "Time Series Analysis with forecast package in R"
-output: html_notebook
+output: pdf_document
 author: The Data Science Show
 ---
 
-Youtube tutorial [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you  
+Youtube tutorial [Time Series Analysis with forecast Package in R Example Tutorial - The Data Science Show](https://www.youtube.com/watch?v=Zu1iimmsKD0). 
 
 # Time Series Data
 Data that changes over time, e.g., stock price, sales growth.
@@ -41,7 +41,23 @@ gdp <- gdp[order(gdp$year),] #remember comma!!
 head(gdp)
 ```
 
+An initial plot shows GDP Per Capita trend (if any)
+```{r}
+plot(GDPPerCap~year, data = gdp)
+```
+Let's make things a little more eye catching using ggplot...
+```{r}
+library(ggplot2)
+ggplot(gdp, aes(x=gdp$year, y=gdp$GDPPerCap)) +
+        geom_point(
+                color="orange",
+                fill="#69b3a2",
+                alpha=0.5,
+                size=2,
+                shape=21,
+                stroke=1
+        )
+```
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+

@@ -104,4 +104,13 @@ coef(usOptimal)
 Coefficients ar1 and ar2 are the values of Beta1 ($\beta_1$) in our ARMA model.
 Coefficients ma1 and ma2 are the values of Alpha1 ($\alpha_1$) in our ARMA model.
 
+# Creating prediction
+```{r prediction}
+predict(usOptimal, n.ahead=5, se.fit=T) #n.ahead = number of predictions to forecast (ie, 5 in example)
+
+# visualise the prediction
+gdpForecast <- forecast(object=usOptimal, h=5)
+plot(gdpForecast)
+```
+
 
